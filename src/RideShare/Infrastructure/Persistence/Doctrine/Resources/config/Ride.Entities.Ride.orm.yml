@@ -8,10 +8,10 @@ RideShare\Domain\Ride\Entities\Ride:
         strategy: NONE
   embedded:
       departure:
-        class: RideShare\Domain\Core\ValueObject\Coordinate
+        class: RideShare\Domain\Core\ValueObjects\Coordinate
         columnPrefix: departure_
       destination:
-        class: RideShare\Domain\Core\ValueObject\Coordinate
+        class: RideShare\Domain\Core\ValueObjects\Coordinate
         columnPrefix: destination_
   fields:
     departureTime:

@@ -1,0 +1,27 @@
+# Learn more about services, parameters and containers at
+# https://symfony.com/doc/current/service_container.html
+parameters:
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: true
+
+    RideShare\Infrastructure\:
+        resource: '../../src/RideShare/Infrastructure/*'
+
+    # Handlers
+    register_ride_command_handler:
+        class: RideShare\Application\RegisterRide\RegisterRideHandler
+        tags:
+          - { name: command_handler, handles: RideShare\Application\RegisterRide\RegisterRideCommand }
+
+
+    # Projections
+    RideShare\Infrastructure\Projection\Projector:
+        class: RideShare\Infrastructure\Projection\Projector
+        calls:
+          - method: register
+            arguments:
+              -
+                - '@RideShare\Infrastructure\Projection\DoctrineDbal\RideWasCreatedProjection'
