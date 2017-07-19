@@ -1,0 +1,7 @@
+RideShare\Domain\Core\ValueObjects\Coordinate:
+  type: embedded
+  fields:
+    lat:
+      type: float
+    long:
+      type: float

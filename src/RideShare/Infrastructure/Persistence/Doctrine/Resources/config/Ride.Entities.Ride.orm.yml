@@ -1,0 +1,18 @@
+RideShare\Domain\Ride\Entities\Ride:
+  type: entity
+  table: ride
+  id:
+    id:
+      type: string
+      generator:
+        strategy: NONE
+  embedded:
+      departure:
+        class: RideShare\Domain\Core\ValueObject\Coordinate
+        columnPrefix: departure_
+      destination:
+        class: RideShare\Domain\Core\ValueObject\Coordinate
+        columnPrefix: destination_
+  fields:
+    departureTime:
+      type: datetime
