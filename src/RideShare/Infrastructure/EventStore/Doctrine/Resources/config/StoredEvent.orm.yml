@@ -1,0 +1,16 @@
+RideShare\Infrastructure\EventStore\Doctrine\StoredEvent:
+  type: entity
+  table: event
+  repositoryClass: RideShare\Infrastructure\EventStore\Doctrine\DoctrineEventStore
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: auto
+  fields:
+    event:
+      type: string
+    occurredOn:
+      type: datetime
+    body:
+      type: string
