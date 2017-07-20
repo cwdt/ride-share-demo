@@ -6,7 +6,9 @@ use Psr\Log\LoggerInterface;
 use RideShare\Application\RegisterRide\RegisterRideCommand;
 use SimpleBus\Message\Bus\MessageBus;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\Input;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class RegisterRide extends Command
@@ -33,8 +35,13 @@ class RegisterRide extends Command
      */
     public function configure()
     {
-        $this->setName('ride-share:ride:register');
-        $this->setDescription('Register a ride');
+        $this->setName('ride-share:ride:register')
+            ->setDescription('Register a ride')
+            ->addArgument('departure-lat', InputOption::VALUE_REQUIRED)
+            ->addArgument('departure-long', InputOption::VALUE_REQUIRED)
+            ->addArgument('destination-lat', InputOption::VALUE_REQUIRED)
+            ->addArgument('destination-long', InputOption::VALUE_REQUIRED)
+            ->addArgument('departure-time', InputOption::VALUE_REQUIRED);
     }
 
     /**
@@ -42,17 +49,22 @@ class RegisterRide extends Command
      * @param OutputInterface $output
      * @return void
      */
-    public function execute(InputInterface $input, OutputInterface $output)
+    public  function execute(InputInterface $input, OutputInterface $output)
     {
+        $output->writeln('<info>Start registering ride</info>');
+
+        $rideId = uniqid();
         $this->commandBus->handle(
             new RegisterRideCommand(
-                uniqid(),
-                10,
-                10,
-                10,
-                10,
-                '2017-10-11 10:00:00'
+                $rideId,
+                $input->getArgument('departure-lat'),
+                $input->getArgument('departure-long'),
+                $input->getArgument('destination-lat'),
+                $input->getArgument('destination-long'),
+                $input->getArgument('departure-time')
             )
         );
+
+        $output->writeln('<info>Finished registering ride (' . $rideId . ')</info>');
     }
 }

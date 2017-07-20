@@ -62,7 +62,6 @@ class Ride extends AggregateRoot
         return $this->departureTime;
     }
 
-
     /**
      * @param RideId $id
      * @param Coordinate $departure
