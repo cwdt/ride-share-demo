@@ -3,5 +3,6 @@ Only for demonstration purposes.
 
 ## To Do
 - Finish DomainEventPublisher implementation
-- Add occuredOn to domain events and store it in event store
+- Add occured on to domain events and store it in event store
+- Add migrations for projections
 - ...

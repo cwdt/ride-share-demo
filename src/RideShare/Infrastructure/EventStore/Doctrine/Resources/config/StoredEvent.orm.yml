@@ -1,7 +1,6 @@
-RideShare\Infrastructure\EventStore\Doctrine\StoredEvent:
+RideShare\Infrastructure\EventStore\Doctrine\Entities\StoredEvent:
   type: entity
   table: event
-  repositoryClass: RideShare\Infrastructure\EventStore\Doctrine\DoctrineEventStore
   id:
     id:
       type: integer

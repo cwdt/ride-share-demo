@@ -51,7 +51,7 @@ class RegisterRide extends Command
                 10,
                 10,
                 10,
-                '2017-10-10 10:00:00'
+                '2017-10-11 10:00:00'
             )
         );
     }

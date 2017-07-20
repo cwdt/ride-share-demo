@@ -2,12 +2,25 @@
 
 namespace RideShare\Infrastructure\EventStore\Doctrine;
 
-use Doctrine\ORM\EntityRepository;
+use DateTimeImmutable;
+use Doctrine\ORM\EntityManagerInterface;
 use RideShare\Domain\Core\Events\DomainEvent;
 use RideShare\Domain\EventStore\EventStore;
+use RideShare\Infrastructure\EventStore\Doctrine\Entities\StoredEvent;
 
-class DoctrineEventStore extends EntityRepository implements EventStore
+class DoctrineEventStore implements EventStore
 {
+    /** @var EntityManagerInterface */
+    protected $entityManager;
+
+    /**
+     * @param EntityManagerInterface $entityManager
+     */
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     /**
      * @inheritdoc
      */
@@ -15,10 +28,10 @@ class DoctrineEventStore extends EntityRepository implements EventStore
     {
         $storedEvent = new StoredEvent(
             get_class($event),
-            new \DateTimeImmutable(),
+            new DateTimeImmutable(),
             serialize($event)
         );
 
-        $this->getEntityManager()->persist($storedEvent);
+        $this->entityManager->persist($storedEvent);
     }
 }

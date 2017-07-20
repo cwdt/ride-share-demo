@@ -1,6 +1,6 @@
 <?php
 
-namespace RideShare\Infrastructure\EventStore\Doctrine;
+namespace RideShare\Infrastructure\EventStore\Doctrine\Entities;
 
 use DateTimeImmutable;
 

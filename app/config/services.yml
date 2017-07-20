@@ -5,14 +5,15 @@ services:
     _defaults:
         autowire: true
         autoconfigure: true
-        public: true
+        public: false
 
     RideShare\Infrastructure\:
         resource: '../../src/RideShare/Infrastructure/*'
 
     # Handlers
-    register_ride_command_handler:
+    RideShare\Application\RegisterRide\RegisterRideHandler:
         class: RideShare\Application\RegisterRide\RegisterRideHandler
+        public: true
         tags:
           - { name: command_handler, handles: RideShare\Application\RegisterRide\RegisterRideCommand }
 
