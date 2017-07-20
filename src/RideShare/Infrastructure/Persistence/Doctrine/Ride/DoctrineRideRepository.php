@@ -43,7 +43,6 @@ class DoctrineRideRepository implements RideRepository
                 $this->eventStore->append($event);
             }
         });
-
         $this->projector->project($ride->getRecordedEvents());
     }
 

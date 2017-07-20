@@ -33,6 +33,7 @@ class RideWasCreated extends DomainEvent
         $this->departure = $departure;
         $this->destination = $destination;
         $this->departureTime = $departureTime;
+        $this->occurredOn = new DateTimeImmutable();
     }
 
     /**

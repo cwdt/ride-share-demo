@@ -7,6 +7,9 @@ class DomainEventPublisher
     /** @var DomainEventPublisher */
     protected static $instance;
 
+    /** @var DomainEventSubscriber[] */
+    protected $subscribers = [];
+
     /**
      * @return DomainEventPublisher
      */
@@ -20,10 +23,22 @@ class DomainEventPublisher
     }
 
     /**
+     * @param DomainEventSubscriber $subscriber
+     */
+    public function subscribe(DomainEventSubscriber $subscriber)
+    {
+        $this->subscribers[] = $subscriber;
+    }
+
+    /**
      * @param DomainEvent $event
      */
     public function publish(DomainEvent $event)
     {
-        // TODO implement publish
+        foreach ($this->subscribers as $subscriber) {
+            if ($subscriber->isSubscribedTo($event)) {
+                $subscriber->handle($event);
+            }
+        }
     }
 }

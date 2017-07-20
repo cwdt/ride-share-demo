@@ -26,3 +26,8 @@ services:
             arguments:
               -
                 - '@RideShare\Infrastructure\Projection\DoctrineDbal\RideWasCreatedProjection'
+
+
+    # Domain events
+    RideShare\Infrastructure\Events\PersistDomainEventSubscribe:
+        public: true

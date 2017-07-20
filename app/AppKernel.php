@@ -1,5 +1,7 @@
 <?php
 
+use RideShare\Domain\Core\Events\DomainEventPublisher;
+use RideShare\Infrastructure\Events\PersistDomainEventSubscriber;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
 

@@ -2,7 +2,6 @@
 
 namespace RideShare\Infrastructure\EventStore\Doctrine;
 
-use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use RideShare\Domain\Core\Events\DomainEvent;
 use RideShare\Domain\EventStore\EventStore;
@@ -28,7 +27,7 @@ class DoctrineEventStore implements EventStore
     {
         $storedEvent = new StoredEvent(
             get_class($event),
-            new DateTimeImmutable(),
+            $event->getOccurredOn(),
             serialize($event)
         );
 

@@ -22,6 +22,7 @@ class DepartureTimeHasChanged extends DomainEvent
     {
         $this->id = $id;
         $this->departureTime = $departureTime;
+        $this->occurredOn = new DateTimeImmutable();
     }
 
     /**
