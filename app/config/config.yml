@@ -70,11 +70,3 @@ doctrine:
               dir: '%kernel.project_dir%/src/RideShare/Infrastructure/EventStore/Doctrine/Resources/config'
               is_bundle: false
               prefix: RideShare\Infrastructure\EventStore\Doctrine\Entities
-
-# Swiftmailer Configuration
-swiftmailer:
-    transport: '%mailer_transport%'
-    host: '%mailer_host%'
-    username: '%mailer_user%'
-    password: '%mailer_password%'
-    spool: { type: memory }
