@@ -25,9 +25,16 @@ services:
           - method: register
             arguments:
               -
-                - '@RideShare\Infrastructure\Projection\DoctrineDbal\RideWasCreatedProjection'
+                - '@RideShare\Infrastructure\Projection\ElasticSearch\RideWasCreatedProjection'
 
 
     # Domain events
     RideShare\Infrastructure\Events\PersistDomainEventSubscribe:
         public: true
+
+
+    Elasticsearch\Client:
+      factory: [Elasticsearch\ClientBuilder, fromConfig]
+      arguments:
+          - hosts:
+              - '%elastic_search%'

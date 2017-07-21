@@ -33,6 +33,8 @@ You'll need to configure your application to use any services you enabled:
 Service|Hostname|Port number
 ------|---------|-----------
 php-fpm|php-fpm|9000
+MySQL|mysql|3306 (default)
+Elasticsearch|elasticsearch|9200 (HTTP default) / 9300 (ES transport default)
 
 #Docker compose cheatsheet#
 

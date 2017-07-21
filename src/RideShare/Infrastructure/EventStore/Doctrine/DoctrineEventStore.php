@@ -4,7 +4,7 @@ namespace RideShare\Infrastructure\EventStore\Doctrine;
 
 use Doctrine\ORM\EntityManagerInterface;
 use RideShare\Domain\Core\Events\DomainEvent;
-use RideShare\Domain\EventStore\EventStore;
+use RideShare\Domain\Core\EventStore\EventStore;
 use RideShare\Infrastructure\EventStore\Doctrine\Entities\StoredEvent;
 
 class DoctrineEventStore implements EventStore

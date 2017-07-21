@@ -3,7 +3,7 @@
 namespace RideShare\Infrastructure\Persistence\Doctrine\Ride;
 
 use Doctrine\ORM\EntityManagerInterface;
-use RideShare\Domain\EventStore\EventStore;
+use RideShare\Domain\Core\EventStore\EventStore;
 use RideShare\Domain\Ride\Entities\Ride;
 use RideShare\Domain\Ride\Entities\RideId;
 use RideShare\Domain\Ride\Repositories\RideRepository;

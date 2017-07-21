@@ -1,6 +1,6 @@
 <?php
 
-namespace RideShare\Domain\EventStore;
+namespace RideShare\Domain\Core\EventStore;
 
 use RideShare\Domain\Core\Events\DomainEvent;
 
