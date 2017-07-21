@@ -8,7 +8,7 @@ services:
         public: false
 
     RideShare\Infrastructure\:
-        resource: '../../src/RideShare/Infrastructure/*'
+        resource: '../../src/RideShare/Infrastructure/'
 
     # Handlers
     RideShare\Application\RegisterRide\RegisterRideHandler:
