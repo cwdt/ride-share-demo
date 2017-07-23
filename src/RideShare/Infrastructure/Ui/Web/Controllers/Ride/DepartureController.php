@@ -2,6 +2,7 @@
 
 namespace RideShare\Infrastructure\Ui\Web\Controllers\Ride;
 
+use DateTime;
 use Elasticsearch\Client;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,15 +25,30 @@ class DepartureController extends Controller
      */
     public function all()
     {
-        $response = $this->client->search([
-            'index' => 'rides',
-            'type' => 'ride-departure',
-            'body' => [
-                'sort' => [
-                    'departure' => ['order' => 'desc']
-                ]
+        $response = $this->client->search(
+            [
+                'index' => 'rides',
+                'type'  => 'ride-departure',
+                'body'  => [
+                    'query' => [
+                        'bool' => [
+                            'filter' => [
+                                'range' => [
+                                    'departure' => [
+                                        'gte' => (new DateTime())->format(DATE_ATOM),
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                    'sort'  => [
+                        'departure' => [
+                            'order' => 'asc',
+                        ],
+                    ],
+                ],
             ]
-        ]);
+        );
 
         $rides = [];
         foreach ($response['hits']['hits'] as $hit) {
