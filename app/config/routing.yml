@@ -1,3 +1,8 @@
 ride_departure_all:
     path:     /ride/departure/all
-    defaults: { _controller: RideShare\Infrastructure\Ui\Web\Ride\DepartureController:all }
+    defaults: { _controller: RideShare\Infrastructure\Ui\Web\Controllers\Ride\DepartureController:all }
+
+ride_register_get:
+    path:     /ride/register
+    defaults: { _controller: RideShare\Infrastructure\Ui\Web\Controllers\Ride\RideController:register }
+    methods: [GET, POST]

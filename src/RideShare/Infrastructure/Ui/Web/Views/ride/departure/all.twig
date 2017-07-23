@@ -1,0 +1,16 @@
+{% extends '@WebUI/layouts/base.twig' %}
+{% block title %}All departures{% endblock %}
+
+{% block header %}
+    <div class="page-header">
+        <h1>Departures</h1>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <ul class="list-group">
+        {% for ride in rides %}
+            <li class="list-group-item">{{ ride.departure|date('Y-m-d H:i:s') }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -35,8 +35,11 @@ framework:
 
 # Twig Configuration
 twig:
+    form_themes: ['bootstrap_3_layout.html.twig']
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
+    paths:
+      '%kernel.project_dir%/src/RideShare/Infrastructure/Ui/Web/Views': WebUI
 
 # Doctrine Configuration
 doctrine:

@@ -1,10 +1,10 @@
 <?php
 
-namespace RideShare\Infrastructure\Ui\Web\Ride;
+namespace RideShare\Infrastructure\Ui\Web\Controllers\Ride;
 
 use Elasticsearch\Client;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 class DepartureController extends Controller
 {
@@ -20,7 +20,7 @@ class DepartureController extends Controller
     }
 
     /**
-     * @return JsonResponse
+     * @return Response
      */
     public function all()
     {
@@ -34,6 +34,11 @@ class DepartureController extends Controller
             ]
         ]);
 
-        return new JsonResponse($response);
+        $rides = [];
+        foreach ($response['hits']['hits'] as $hit) {
+            $rides[] = $hit['_source'];
+        }
+
+        return $this->render('@WebUI/ride/departure/all.twig', ['rides' => $rides]);
     }
 }
