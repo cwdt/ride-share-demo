@@ -36,9 +36,9 @@ class RideWasCreatedProjection implements Projection
         $this->elasticSearchClient->create([
             'index' => 'rides',
             'type' => 'ride-departure',
-            'id' => (string) $event->getId(),
+            'id' => (string)$event->getId(),
             'body' => [
-                'id' => (string) $event->getId(),
+                'id' => (string)$event->getId(),
                 'departure' => $event->getDepartureTime()->format(DATE_ATOM)
             ]
         ]);

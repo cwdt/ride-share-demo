@@ -54,7 +54,7 @@ class RideController extends Controller
             ));
 
             $this->addFlash('success',
-                'The ride was registered'
+                'The ride was registered and will appear shortly'
             );
 
             return $this->redirectToRoute('ride_departure_all');
