@@ -2,7 +2,6 @@
 
 namespace RideShare\Domain\Core\Events;
 
-use RideShare\Domain\Core\Events\DomainEvent;
 use RideShare\Domain\Core\Entities\StoredEvent;
 
 interface EventStore
@@ -16,8 +15,8 @@ interface EventStore
     /**
      * Get all stored events since given $storedEventId
      *
-     * @param int $storedEventId
+     * @param null|int $storedEventId
      * @return StoredEvent[]
      */
-    public function allStoredEventsSince(int $storedEventId);
+    public function allStoredEventsSince(?int $storedEventId);
 }

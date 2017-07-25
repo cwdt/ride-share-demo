@@ -12,4 +12,4 @@ RideShare\Domain\Core\Entities\StoredEvent:
     occurredOn:
       type: datetime
     body:
-      type: string
+      type: text

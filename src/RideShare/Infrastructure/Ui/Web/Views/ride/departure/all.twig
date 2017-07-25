@@ -10,7 +10,7 @@
 {% block content %}
     <ul class="list-group">
         {% for ride in rides %}
-            <li class="list-group-item">{{ ride.departure|date('Y-m-d H:i:s') }}</li>
+            <li class="list-group-item">{{ ride.departure|date('Y-m-d H:i:s') }} ({{ ride.id }})</li>
         {% endfor %}
     </ul>
 {% endblock %}

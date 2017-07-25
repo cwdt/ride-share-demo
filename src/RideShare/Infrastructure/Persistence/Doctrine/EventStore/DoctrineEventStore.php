@@ -1,6 +1,6 @@
 <?php
 
-namespace RideShare\Infrastructure\Persistence\Doctrine\EventStore;
+namespace RideShare\Infrastructure\Persistence\Doctrine\ EventStore;
 
 use Doctrine\ORM\EntityManagerInterface;
 use RideShare\Domain\Core\Events\DomainEvent;
@@ -35,15 +35,22 @@ class DoctrineEventStore implements EventStore
     }
 
     /**
-     * @param int $storedEventId
-     * @return array|mixed
+     * @param null|int $storedEventId
+     * @return StoredEvent[]
      */
-    public function allStoredEventsSince(int $storedEventId)
+    public function allStoredEventsSince(?int $storedEventId)
     {
         $qb = $this->entityManager->createQueryBuilder();
-        $qb->select([StoredEvent::class => 'e'])
-            ->where('e.id > :id')
-            ->setParameter('id', $storedEventId);
+        $qb
+            ->select('e')
+            ->from(StoredEvent::class, 'e')
+            ->orderBy('e.id', 'asc');
+
+        if ($storedEventId) {
+            $qb
+                ->where('e.id > :id')
+                ->setParameter('id', $storedEventId);
+        }
 
         return $qb->getQuery()->getResult();
     }

@@ -53,7 +53,11 @@ class RideController extends Controller
                 $data['departure_time']->format(DATE_ATOM)
             ));
 
-            $this->addFlash('success', 'Ride registered');
+            $this->addFlash('success',
+                'The ride was registered'
+            );
+
+            return $this->redirectToRoute('ride_departure_all');
         }
 
         return $this->render('@WebUI/ride/register.twig', ['form' => $form->createView()]);
