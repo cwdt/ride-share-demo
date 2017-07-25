@@ -29,13 +29,12 @@ services:
           - method: register
             arguments:
               -
-                - '@RideShare\Infrastructure\Projection\ElasticSearch\RideWasCreatedProjection'
+                - '@RideShare\Infrastructure\Projection\RideWasCreatedProjection'
 
 
     # Domain events
     RideShare\Infrastructure\Events\PersistDomainEventSubscribe:
         public: true
-
 
     Elasticsearch\Client:
       factory: [Elasticsearch\ClientBuilder, fromConfig]

@@ -67,9 +67,4 @@ doctrine:
               type: yml
               dir: '%kernel.project_dir%/src/RideShare/Infrastructure/Persistence/Doctrine/Resources/config'
               is_bundle: false
-              prefix: RideShare\Domain          # ...
-          RideShare\Infrastructure\EventStore\Doctrine\Entities:
-              type: yml
-              dir: '%kernel.project_dir%/src/RideShare/Infrastructure/EventStore/Doctrine/Resources/config'
-              is_bundle: false
-              prefix: RideShare\Infrastructure\EventStore\Doctrine\Entities
+              prefix: RideShare\Domain

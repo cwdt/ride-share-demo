@@ -1,12 +1,12 @@
 <?php
 
-namespace RideShare\Infrastructure\EventStore\Doctrine\Entities;
+namespace RideShare\Domain\Core\Entities;
 
 use DateTimeImmutable;
 
 class StoredEvent
 {
-    /** @var string */
+    /** @var int */
     protected $id;
 
     /** @var string */
@@ -31,9 +31,9 @@ class StoredEvent
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getId(): string
+    public function getId(): int
     {
         return $this->id;
     }

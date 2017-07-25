@@ -10,6 +10,11 @@ use RideShare\Domain\Ride\Events\RideWasCreated;
 
 class Ride extends AggregateRoot
 {
+    /** @var array */
+    protected $apply = [
+        RideWasCreated::class => 'applyRideWasCreated',
+    ];
+
     /** @var RideId */
     protected $id;
 
@@ -28,6 +33,34 @@ class Ride extends AggregateRoot
     public function __construct(RideId $id)
     {
         $this->id = $id;
+    }
+
+    /**
+     * @param RideId $id
+     * @param Coordinate $departure
+     * @param Coordinate $destination
+     * @param DateTimeImmutable $departureTime
+     * @return Ride
+     */
+    public static function create(RideId $id, Coordinate $departure, Coordinate $destination, DateTimeImmutable $departureTime): Ride
+    {
+        $ride = new self($id);
+        $ride->recordApplyAndPublishThat(
+            new RideWasCreated($id, $departure, $destination, $departureTime)
+        );
+
+        return $ride;
+    }
+
+    /**
+     * @param RideWasCreated $event
+     */
+    protected function applyRideWasCreated(RideWasCreated $event)
+    {
+        $this->id = $event->getId();
+        $this->departure = $event->getDeparture();
+        $this->destination = $event->getDestination();
+        $this->departureTime = $event->getDepartureTime();
     }
 
     /**
@@ -60,51 +93,5 @@ class Ride extends AggregateRoot
     public function getDepartureTime(): DateTimeImmutable
     {
         return $this->departureTime;
-    }
-
-    /**
-     * @param RideId $id
-     * @param Coordinate $departure
-     * @param Coordinate $destination
-     * @param DateTimeImmutable $departureTime
-     * @return Ride
-     */
-    public static function create(RideId $id, Coordinate $departure, Coordinate $destination, DateTimeImmutable $departureTime): Ride
-    {
-        $ride = new self($id);
-        $ride->recordApplyAndPublishThat(
-            new RideWasCreated($id, $departure, $destination, $departureTime)
-        );
-
-        return $ride;
-    }
-
-    /**
-     * @param DateTimeImmutable $departureTime
-     */
-    public function changeDepartureTime(DateTimeImmutable $departureTime)
-    {
-        $this->recordApplyAndPublishThat(
-            new DepartureTimeHasChanged($this->getId(), $departureTime)
-        );
-    }
-
-    /**
-     * @param RideWasCreated $event
-     */
-    protected function applyRideWasCreated(RideWasCreated $event)
-    {
-        $this->id = $event->getId();
-        $this->departure = $event->getDeparture();
-        $this->destination = $event->getDestination();
-        $this->departureTime = $event->getDepartureTime();
-    }
-
-    /**
-     * @param DepartureTimeHasChanged $event
-     */
-    protected function applyDepartureTimeHasChanged(DepartureTimeHasChanged $event)
-    {
-        $this->departureTime = $event->getDepartureTime();
     }
 }

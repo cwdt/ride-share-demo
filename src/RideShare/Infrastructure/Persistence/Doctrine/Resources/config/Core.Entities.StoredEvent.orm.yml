@@ -1,4 +1,4 @@
-RideShare\Infrastructure\EventStore\Doctrine\Entities\StoredEvent:
+RideShare\Domain\Core\Entities\StoredEvent:
   type: entity
   table: event
   id:

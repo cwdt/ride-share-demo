@@ -1,6 +1,6 @@
 <?php
 
-namespace RideShare\Infrastructure\Projection\ElasticSearch;
+namespace RideShare\Infrastructure\Projection;
 
 use Doctrine\DBAL\Connection;
 use Elasticsearch\Client;
@@ -10,14 +10,14 @@ use RideShare\Infrastructure\Projection\Projection;
 class RideWasCreatedProjection implements Projection
 {
     /** @var Client */
-    protected $client;
+    protected $elasticSearchClient;
 
     /**
      * @param Client $client
      */
     public function __construct(Client $client)
     {
-        $this->client = $client;
+        $this->elasticSearchClient = $client;
     }
 
     /**
@@ -33,7 +33,7 @@ class RideWasCreatedProjection implements Projection
      */
     public function project($event)
     {
-        $this->client->index([
+        $this->elasticSearchClient->create([
             'index' => 'rides',
             'type' => 'ride-departure',
             'id' => $event->getId(),

@@ -6,7 +6,7 @@ use RideShare\Domain\Core\Events\DomainEvent;
 
 class Projector
 {
-    /** @var array */
+    /** @var Projection[] */
     protected $projections = [];
 
     /**
@@ -16,7 +16,7 @@ class Projector
     {
         foreach ($projections as $projection) {
             $listensTo = $projection->listensTo();
-            $this->projections[$listensTo][] = $projection;
+            $this->projections[$listensTo] = $projection;
         }
     }
 
@@ -26,9 +26,8 @@ class Projector
     public function project(array $events)
     {
         foreach ($events as $event) {
-            $projectionImplementations = isset($this->projections[get_class($event)]) ? $this->projections[get_class($event)] : [];
-            foreach ($projectionImplementations as $projection) {
-                $projection->project($event);
+            if (isset($this->projections[get_class($event)])) {
+                $this->projections[get_class($event)]->project($event);
             }
         }
     }

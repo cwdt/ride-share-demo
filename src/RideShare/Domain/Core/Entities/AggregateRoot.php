@@ -2,11 +2,15 @@
 
 namespace RideShare\Domain\Core\Entities;
 
+use BadMethodCallException;
 use RideShare\Domain\Core\Events\DomainEvent;
 use RideShare\Domain\Core\Events\DomainEventPublisher;
 
 abstract class AggregateRoot
 {
+    /** @var array */
+    protected $apply;
+
     /** @var array */
     protected $recordedEvents = [];
 
@@ -33,8 +37,11 @@ abstract class AggregateRoot
      */
     protected function applyThat(DomainEvent $event)
     {
-        $modifier = 'apply' . substr(get_class($event), strrpos(get_class($event), '\\') + 1);
+        if (! isset($this->apply[get_class($event)])) {
+            throw new BadMethodCallException('Can\'t apply ' . get_class($event));
+        }
 
+        $modifier = $this->apply[get_class($event)];
         $this->$modifier($event);
     }
 

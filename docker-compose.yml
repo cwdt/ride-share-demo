@@ -15,6 +15,8 @@ services:
         - MYSQL_DATABASE=cqrs-ride-share
         - MYSQL_USER=cqrs-ride-share
         - MYSQL_PASSWORD=demo
+      ports:
+        - "33060:3306"
 
     elasticsearch:
       image: docker.elastic.co/elasticsearch/elasticsearch:5.5.0
