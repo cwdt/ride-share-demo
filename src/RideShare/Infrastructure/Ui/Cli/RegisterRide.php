@@ -3,6 +3,7 @@
 namespace RideShare\Infrastructure\Ui\Cli;
 
 use Psr\Log\LoggerInterface;
+use Ramsey\Uuid\Uuid;
 use RideShare\Application\RegisterRide\RegisterRideCommand;
 use SimpleBus\Message\Bus\MessageBus;
 use Symfony\Component\Console\Command\Command;
@@ -52,7 +53,7 @@ class RegisterRide extends Command
     {
         $output->writeln('<info>Start registering ride</info>');
 
-        $rideId = uniqid();
+        $rideId = Uuid::uuid4();
         $this->commandBus->handle(
             new RegisterRideCommand(
                 $rideId,

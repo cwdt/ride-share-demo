@@ -30,7 +30,7 @@ class Ride extends AggregateRoot
     /**
      * @param RideId $id
      */
-    public function __construct(RideId $id)
+    private function __construct(RideId $id)
     {
         $this->id = $id;
     }
@@ -42,7 +42,7 @@ class Ride extends AggregateRoot
      * @param DateTimeImmutable $departureTime
      * @return Ride
      */
-    public static function create(RideId $id, Coordinate $departure, Coordinate $destination, DateTimeImmutable $departureTime): Ride
+    public static function from(RideId $id, Coordinate $departure, Coordinate $destination, DateTimeImmutable $departureTime): Ride
     {
         $ride = new self($id);
         $ride->recordApplyAndPublishThat(

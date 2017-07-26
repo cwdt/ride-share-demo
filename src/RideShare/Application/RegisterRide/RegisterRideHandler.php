@@ -27,10 +27,10 @@ class RegisterRideHandler
      */
     public function handle(RegisterRideCommand $command)
     {
-        $ride = Ride::create(
+        $ride = Ride::from(
             RideId::create($command->getGuid()),
-            Coordinate::create($command->getDepartureLat(), $command->getDepartureLong()),
-            Coordinate::create($command->getDestinationLat(), $command->getDestinationLong()),
+            Coordinate::from($command->getDepartureLat(), $command->getDepartureLong()),
+            Coordinate::from($command->getDestinationLat(), $command->getDestinationLong()),
             new DateTimeImmutable($command->getDepartureTime())
         );
 

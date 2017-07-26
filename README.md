@@ -13,7 +13,7 @@ Only for demonstration purposes.
 ## Running
 
 ### Web
-```
+
 http://localhost:8080/ride/departure/all
 http://localhost:8080/ride/register
 ```

@@ -2,6 +2,7 @@
 
 namespace RideShare\Infrastructure\Ui\Web\Controllers\Ride;
 
+use Ramsey\Uuid\Uuid;
 use RideShare\Application\RegisterRide\RegisterRideCommand;
 use SimpleBus\Message\Bus\MessageBus;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -45,7 +46,7 @@ class RideController extends Controller
         if ($form->isValid()) {
             $data = $form->getData();
             $this->commandBus->handle(new RegisterRideCommand(
-                uniqid(),
+                Uuid::uuid4(),
                 $data['departure_latitude'],
                 $data['departure_longitude'],
                 $data['destination_latitude'],

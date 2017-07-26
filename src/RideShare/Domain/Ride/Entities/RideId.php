@@ -10,7 +10,7 @@ class RideId
     /**
      * @param string $id
      */
-    public function __construct($id)
+    private function __construct($id)
     {
         $this->id = $id;
     }
