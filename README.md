@@ -14,6 +14,7 @@ Only for demonstration purposes.
 
 ### Web
 
+```
 http://localhost:8080/ride/departure/all
 http://localhost:8080/ride/register
 ```
@@ -25,8 +26,11 @@ docker-compose exec php-fpm php bin/console ride-share:ride:register [departure-
 ```
 
 ## Utils
+
 ### Rebuilding read models
+
 Clear your read models manually and execute the following command:
+
 ```
 docker-compose exec php-fpm php bin/console utils:rebuild-read-models
 ```
