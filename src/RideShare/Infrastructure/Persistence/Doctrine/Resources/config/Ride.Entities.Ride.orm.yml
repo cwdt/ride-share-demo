@@ -15,4 +15,4 @@ RideShare\Domain\Ride\Entities\Ride:
         columnPrefix: destination_
   fields:
     departureTime:
-      type: datetime
+      type: datetimeimmutable

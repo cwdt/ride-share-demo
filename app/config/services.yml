@@ -21,6 +21,12 @@ services:
         tags:
           - { name: command_handler, handles: RideShare\Application\RegisterRide\RegisterRideCommand }
 
+    RideShare\Application\ChangeDepartureTime\ChangeDepartureTimeHandler:
+        class: RideShare\Application\ChangeDepartureTime\ChangeDepartureTimeHandler
+        public: true
+        tags:
+          - { name: command_handler, handles: RideShare\Application\ChangeDepartureTime\ChangeDepartureTimeCommand }
+
 
     # Projections
     RideShare\Infrastructure\Projection\Projector:
@@ -30,6 +36,7 @@ services:
             arguments:
               -
                 - '@RideShare\Infrastructure\Projection\RideWasCreatedProjection'
+                - '@RideShare\Infrastructure\Projection\DepartureTimeHasChangedProjection'
 
 
     # Domain events

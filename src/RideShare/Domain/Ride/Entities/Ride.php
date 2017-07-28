@@ -2,6 +2,7 @@
 
 namespace RideShare\Domain\Ride\Entities;
 
+use DateTime;
 use DateTimeImmutable;
 use RideShare\Domain\Core\Entities\AggregateRoot;
 use RideShare\Domain\Core\ValueObjects\Coordinate;
@@ -13,6 +14,7 @@ class Ride extends AggregateRoot
     /** @var array */
     protected $apply = [
         RideWasCreated::class => 'applyRideWasCreated',
+        DepartureTimeHasChanged::class => 'applyDepartureTimeHasChanged'
     ];
 
     /** @var RideId */
@@ -53,6 +55,16 @@ class Ride extends AggregateRoot
     }
 
     /**
+     * @param DateTimeImmutable $departureTime
+     */
+    public function changeDepartureTime(DateTimeImmutable $departureTime)
+    {
+        $this->recordApplyAndPublishThat(
+            new DepartureTimeHasChanged($this->getId(), $departureTime)
+        );
+    }
+
+    /**
      * @param RideWasCreated $event
      */
     protected function applyRideWasCreated(RideWasCreated $event)
@@ -64,10 +76,23 @@ class Ride extends AggregateRoot
     }
 
     /**
+     * @param DepartureTimeHasChanged $event
+     */
+    protected function applyDepartureTimeHasChanged(DepartureTimeHasChanged $event)
+    {
+        $this->id = $event->getRideId();
+        $this->departureTime = $event->getDepartureTime();
+    }
+
+    /**
      * @return RideId
      */
     public function getId(): RideId
     {
+        if (! $this->id instanceof RideId) {
+            $this->id = RideId::create($this->id);
+        }
+
         return $this->id;
     }
 
@@ -92,6 +117,10 @@ class Ride extends AggregateRoot
      */
     public function getDepartureTime(): DateTimeImmutable
     {
+        if ($this->departureTime instanceof DateTime) {
+            $this->departureTime = DateTimeImmutable::createFromMutable($this->departureTime);
+        }
+
         return $this->departureTime;
     }
 }

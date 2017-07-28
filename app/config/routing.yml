@@ -6,3 +6,8 @@ ride_register_get:
     path:     /ride/register
     defaults: { _controller: RideShare\Infrastructure\Ui\Web\Controllers\Ride\RideController:register }
     methods: [GET, POST]
+
+ride_register_change_departure_time:
+    path:     /ride/change/{rideId}/{departureTime}
+    defaults: { _controller: RideShare\Infrastructure\Ui\Web\Controllers\Ride\DepartureController:change }
+    methods: [GET]

@@ -9,7 +9,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -53,6 +52,7 @@ class RideController extends Controller
                 $data['destination_longitude'],
                 $data['departure_time']->format(DATE_ATOM)
             ));
+
 
             $this->addFlash('success',
                 'The ride was registered and will appear shortly'
